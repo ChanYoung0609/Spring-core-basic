@@ -6,7 +6,10 @@ import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService {
 
     private final MemberRepository memberRepository ;//= new MemoryMemberRepository();
@@ -18,7 +21,7 @@ public class OrderServiceImpl implements OrderService {
     // OCP 위반 (할인 정책을 변경하려면 클라이언트 코드를 변경해야함)
     //private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
 
-
+    @Autowired //생성자가 1개인 경우 생략 가능
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
