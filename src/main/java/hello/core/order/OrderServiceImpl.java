@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderServiceImpl implements OrderService {
 
-    private final MemberRepository memberRepository ;//= new MemoryMemberRepository();
-    private final DiscountPolicy discountPolicy;
+    @Autowired private MemberRepository memberRepository ;//= new MemoryMemberRepository();
+    @Autowired private DiscountPolicy discountPolicy;
 
     // DIP 위반(의존관계 구체에 의존 x 추상에 의존해야함) 현재 둘다 의존 하는중
     //private final DiscountPolicy discountPolicy =new FixDiscounPolicy();
@@ -21,11 +21,13 @@ public class OrderServiceImpl implements OrderService {
     // OCP 위반 (할인 정책을 변경하려면 클라이언트 코드를 변경해야함)
     //private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
 
+/*
     @Autowired //생성자가 1개인 경우 생략 가능
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
+*/
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
